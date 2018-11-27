@@ -8,11 +8,13 @@ def plotter(file):
     plt.show()
     print(airfoil_coord)
 
+
 # function for inputting airfoil data to main program
 def importer(file):
     airfoil_coord = np.loadtxt(file, dtype=float)
     foilx_coord = airfoil_coord[:, 0]
     foily_coord = airfoil_coord[:, 1]
+    airfoil_coord = airfoil_coord[::-1]
 
     #variable initialization
     mid_panel = np.zeros(shape=[np.size(airfoil_coord, axis=0)-1, 2]) #location of panel's midpoint
@@ -32,6 +34,7 @@ def importer(file):
     norm_panel = np.linalg.norm(normal_panel, axis=1)/(0.01*length_panel)
     temp_norm = np.column_stack([norm_panel, norm_panel])
     normal_panel[:, :] = np.divide(normal_panel, temp_norm)
+
 
     del norm_panel, temp_norm
     return (mid_panel, normal_panel, length_panel, airfoil_coord)
