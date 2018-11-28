@@ -6,6 +6,7 @@ from copy import deepcopy
 def pointsgen(file,domsize,npoints):
 
     _,_,_,airfoil = importer(file)
+    airfoil = airfoil[::-1]
     halflen = int((len(airfoil)+1)/2)
     airfoil_up = airfoil[0:halflen,:]
     airfoil_up = airfoil_up[airfoil_up[:,0].argsort()[::1]]
@@ -217,8 +218,7 @@ def pointsgen(file,domsize,npoints):
         coord[ii,0] = flat_list[ii][0]
         coord[ii, 1] = flat_list[ii][1]
     coord = coord[coord[:, 1].argsort()[::1]]
+
+    thetat = np.zeros(shape=[len(coord)]) # point orientation with resprect to x axis
     # print(flat_list[1799])
-    plt.scatter(coord[:,0],coord[:,1],s=1)
-    # plt.grid(True)
-    plt.show()
-    return coord
+    return (coord,thetat)

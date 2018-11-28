@@ -1,9 +1,11 @@
 import numpy as np
-from copy import deepcopy
+import matplotlib.pyplot as plt
+import matplotlib.colors
 import dataimport as di
 import geometrical_param as geompar
 import  calc_gamma as cgm
 import gridgen_fcn as gg
+import dom_velo as dvel
 
 ## Input variables ##
 print("Input Variables")
@@ -31,5 +33,17 @@ filename = str(input("Input airfoil coordinates eg.(2410.txt) : "))
 mid_panel, normal_panel, length_panel, airfoil = di.importer(filename)
 theta, sine, cosine, rhs = geompar.params(airfoil,aoa)
 gamma, cp = cgm.calgamma(airfoil,mid_panel,length_panel,theta,sine,cosine,rhs,aoa)
-grid = gg.pointsgen(filename, domsize, npoints)
-print("cp")
+grid,thetat = gg.pointsgen(filename, domsize, npoints)
+vy,vx,V = dvel.calcv(grid,mid_panel,airfoil,theta,thetat,sine,cosine,length_panel,gamma,aoa,vfree)
+
+plt.figure(1)
+plt.scatter(grid[:,0],grid[:,1],s=1)
+
+plt.figure(2)
+plt.plot(mid_panel[:,0],cp,'bo-')
+
+plt.figure(3)
+plt.quiver(grid[:,0],grid[:,1],vx,vy,V)
+plt.plot(airfoil[:, 0], airfoil[:, 1])
+plt.show()
+
