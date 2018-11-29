@@ -37,7 +37,12 @@ grid,thetat = gg.pointsgen(filename, domsize, npoints)
 vy,vx,V = dvel.calcv(grid,mid_panel,airfoil,theta,thetat,sine,cosine,length_panel,gamma,aoa,vfree)
 
 plt.figure(1)
-plt.plot(mid_panel[:,0],cp,'bo-')
+plt.subplot(211)
+plt.plot(mid_panel[:,0],cp,'bo-',label = "Pressure Coefficient")
+plt.xlabel("Chord(x/X)");plt.ylabel("-Cp");plt.legend()
+plt.subplot(212)
+plt.plot(airfoil[:, 0], airfoil[:, 1],label = "Airfoil Geometry")
+plt.xlabel("Chord(x/X)");plt.ylabel("Thickness");plt.legend()
 
 plt.figure(2)
 plt.quiver(grid[:,0],grid[:,1],vx,vy,V)
