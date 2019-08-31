@@ -1,12 +1,13 @@
 Laminar Viscous Solver
 
 Contributor:
-Ghifari Adam F 23618002
-Faber Yosua O  23618013
-Hanief Adnadi  23617002
+- Ghifari Adam F
+- Faber Yosua O
+- Hanief Adnadi
 
-//This code was written in Python 3.6
-//Package needed: numpy, matplotlib, copy
+This code was written in Python 3.6
+
+Dependencies: numpy, matplotlib, copy
 
 1. Place all files in one folder:
     a. main.py
