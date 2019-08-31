@@ -1,4 +1,5 @@
 # Laminar Viscous Solver
+This code is a part of final project of Continuum Mechanics II, in Aerospace Engineering ITB
 
 # Contributor:
 - Ghifari Adam F
