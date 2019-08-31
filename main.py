@@ -36,9 +36,25 @@ gamma, cp = cgm.calgamma(airfoil,mid_panel,length_panel,theta,sine,cosine,rhs,ao
 grid,thetat = gg.pointsgen(filename, domsize, npoints)
 vy,vx,V = dvel.calcv(grid,mid_panel,airfoil,theta,thetat,sine,cosine,length_panel,gamma,aoa,vfree)
 
+#Calculate lift coefficient
+cp_u = 0
+cp_l = 0
+#upper surface
+for i in range(int((len(mid_panel)+1)/2),int(len(mid_panel)-1)):
+    cp_u = cp_u + ((cp[i]+cp[i+1])*(mid_panel[i+1,0]-mid_panel[i,0]))/2
+#lower surface
+for i in range(int((len(mid_panel)+1)/2 - 1), 0, -1):
+    cp_l = cp_l + ((cp[i]+cp[i-1])*(mid_panel[i-1,0]-mid_panel[i,0]))/2
+
+Cl = (cp_l-cp_u)*np.cos(aoa)
+
+print("Lift Coefficient = ",Cl)
+zz = np.transpose(np.vstack((mid_panel[:,0],cp)))
+np.savetxt('test.txt', zz, delimiter=',')
+
 plt.figure(1)
 plt.subplot(211)
-plt.plot(mid_panel[:,0],cp,'bo-',label = "Pressure Coefficient")
+plt.plot(mid_panel[:,0],-cp,'bo-',label = "Pressure Coefficient")
 plt.xlabel("Chord(x/X)");plt.ylabel("-Cp");plt.legend()
 plt.subplot(212)
 plt.plot(airfoil[:, 0], airfoil[:, 1],label = "Airfoil Geometry")
@@ -47,6 +63,6 @@ plt.xlabel("Chord(x/X)");plt.ylabel("Thickness");plt.legend()
 plt.figure(2)
 plt.quiver(grid[:,0],grid[:,1],vx,vy,V)
 plt.plot(airfoil[:, 0], airfoil[:, 1])
-plt.colorbar()
+plt.colorbar(label="Velocity (m/s)")
 plt.show()
 

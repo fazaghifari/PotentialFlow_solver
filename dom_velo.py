@@ -1,4 +1,6 @@
 import numpy as np
+import warnings
+warnings.filterwarnings("ignore", category=RuntimeWarning)
 
 def calcv (grid,mid_panel,airfoil,theta,thetat,sine,cosine,l_pan,gamma,aoa,vfree):
     npoints =  len(grid)-1

@@ -60,6 +60,6 @@ def calgamma(airfoil,mid_panel,length_panel,theta,sine, cosine, rhs, aoa ):
         v[i] = np.cos(theta[i]-aoa)
         for j in range(0,mplus1):
             v[i] = v[i] + at[i,j]*gamma[j]
-            cp[i] = -(1-v[i]**2)  #minus sign is for flipping the plot
+            cp[i] = (1-v[i]**2)  #minus sign is for flipping the plot
 
     return (gamma,cp)
