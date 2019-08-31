@@ -1,6 +1,6 @@
-Laminar Viscous Solver
+# Laminar Viscous Solver
 
-Contributor:
+# Contributor:
 - Ghifari Adam F
 - Faber Yosua O
 - Hanief Adnadi
@@ -9,6 +9,7 @@ This code was written in Python 3.6
 
 Dependencies: numpy, matplotlib, copy
 
+# How to use
 1. Place all files in one folder:
     a. main.py
     b. calc_gamma.m
